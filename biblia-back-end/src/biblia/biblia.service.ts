@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
 import { CreateBibliaDto } from './dto/create-biblia.dto';
 import { UpdateBibliaDto } from './dto/update-biblia.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Biblia } from './entities/biblia.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class BibliaService {
-  create(createBibliaDto: CreateBibliaDto) {
-    return 'This action adds a new biblia';
+  constructor(
+    @InjectRepository(Biblia) private bibliaRepository: Repository<Biblia>,
+  ) {}
+
+  async create(createBibliaDto: CreateBibliaDto) {
+    return await this.bibliaRepository.save(createBibliaDto);
   }
 
-  findAll() {
-    return `This action returns all biblia`;
+  async findAll() {
+    return await this.bibliaRepository.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} biblia`;
+  async findOne(id: number) {
+    return await this.bibliaRepository.findOne({
+      where: {
+        id,
+      },
+    });
   }
 
-  update(id: number, updateBibliaDto: UpdateBibliaDto) {
-    return `This action updates a #${id} biblia`;
+  async update(id: number, updateBibliaDto: UpdateBibliaDto) {
+    await this.bibliaRepository.update(id, updateBibliaDto);
   }
 
   remove(id: number) {
-    return `This action removes a #${id} biblia`;
+    return this.bibliaRepository.delete(id);
   }
 }
