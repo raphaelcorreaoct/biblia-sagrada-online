@@ -1,14 +1,10 @@
-import { useState } from 'react'
 
-import './App.css'
-import HomeViewModel from './screens/Home'
+
+import './App.css';
+import HomeViewModel from './screens/Home';
 
 function App() {
-
-
-  return (
-   <HomeViewModel />
-  )
+    return <HomeViewModel />;
 }
 
-export default App
+export default App;

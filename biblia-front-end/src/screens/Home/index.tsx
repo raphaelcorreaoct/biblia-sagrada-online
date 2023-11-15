@@ -1,11 +1,13 @@
-
-import HomeView from "./View";
-import useHomeModel from "./Model";
-import Layout from "../../components/Layout";
+import HomeView from './View';
+import useHomeModel from './Model';
+import Layout from '../../components/Layout';
 
 export default function HomeViewModel() {
-  const useHome = useHomeModel();
+    const useHome = useHomeModel();
 
-
-  return <Layout><HomeView {...useHome}/></Layout>;
+    return (
+        <Layout>
+            <HomeView {...useHome} />
+        </Layout>
+    );
 }
